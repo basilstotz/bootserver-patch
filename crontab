@@ -1,0 +1,2 @@
+# m h  dom mon dow   command
+*/5 * * * * /home/pi/bin/patch.sh >/dev/null 2>/dev/null
