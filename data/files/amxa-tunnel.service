@@ -1,0 +1,13 @@
+[Unit]
+Description=Tunnel for amXa
+After=syslog.target network.target nss-lookup.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/autossh -p443 -i /adm-home/adm-bstotz/keys/id_rsa -o BatchMode=yes -o StrictHostKeyChecking=no -R $PORT:localhost:22 root@backup.amxa.ch sleep 999999999999999
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
