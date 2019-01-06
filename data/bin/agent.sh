@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-if test systemctl is-active amxa-tunnel; then
+if test "$(systemctl is-active amxa-tunnel)" = "active"; then
     exit 0
 fi
 
@@ -42,8 +42,6 @@ systemctl start amxa-tunnel
 #  echo nein
 #  autossh $SSHOPT -R $PORT:localhost:22 root@backup.amxa.ch sleep 999999999999999 &
 #fi
-
-
 
 cp files/language /etc/profile.d/.
 
