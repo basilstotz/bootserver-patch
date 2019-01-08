@@ -6,7 +6,7 @@ SSH="ssh -i /home/pi/bootserver-patch/data/keys/id_rsa adm-bstotz@10.249.15.254 
    if  fping -a 10.249.15.254 >/dev/null 2>/dev/null;then
 
        if ! fping -a backup.amxa.ch >/dev/null 2>/dev/null;then
-	  echo "kein internet. exiting
+	  echo "kein internet"
 	  exit 1
        fi
        
