@@ -6,11 +6,6 @@ if test "$(systemctl is-active amxa-tunnel)" = "active"; then
 fi
 
 
-PORT=4567
-if ! test -z "$1"; then
-    PORT=$1
-fi
-
 #patch puavo-bootserver-sync-images
 echo "patch puavo-bootserver-sync-imeges"
 sed -i 's/VERIFY_PEER/VERIFY_NONE/' /usr/sbin/puavo-bootserver-sync-images
@@ -30,9 +25,12 @@ if ! dpkg -l autossh  2>/dev/null >/dev/null; then
 fi
 
 #start tunnel
+#evtl port anpassen......
 cp files/amxa-tunnel.service /etc/systemd/system/.
-systemctl start amxa-tunnel
 
+if fping -q backup.amxa.ch; then
+  systemctl start amxa-tunnel
+fi
 
 #SSHOPT="-p443 -i /adm-home/adm-bstotz/keys/id_rsa -o BatchMode=yes -o StrictHostKeyChecking=no"
 
