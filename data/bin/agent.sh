@@ -28,11 +28,12 @@ fi
 #evtl port anpassen......
 cp files/amxa-tunnel.service /etc/systemd/system/.
 
-if fping -q backup.amxa.ch; then
+#if fping -q backup.amxa.ch; then
+SSHOPT="-p443 -i /adm-home/adm-bstotz/keys/id_rsa -o StrictHostKeyChecking=no"
+if ssh $SSHOPT root@backup.amxa.ch true; then
   systemctl start amxa-tunnel
 fi
 
-#SSHOPT="-p443 -i /adm-home/adm-bstotz/keys/id_rsa -o BatchMode=yes -o StrictHostKeyChecking=no"
 
 #if $(ps aux|grep -v grep|grep -q autossh); then
 #  echo ja
